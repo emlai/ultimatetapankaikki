@@ -115,7 +115,7 @@ void draw_shadow( int x, int y, int num, int mode )
 	for ( b = sx; b < ex; b ++  ) 
 	{
 		colo = s[b];
-		if ( colo!= 0 ) vb[b] = shadow_table[vb[b]][colo];
+		if ( colo!= 0 ) vb[b] = shadow_table[(uint8_t)vb[b]][(uint8_t)colo];
 	}
 }
 
@@ -238,7 +238,7 @@ void draw_trans_sprite( int x, int y, int xs, int ys, char *spr, int xsize, int 
 	{
 		colo = *( src ++  );
 		if ( colo!= 0 ) 
-		( *dest )  = trans_table[colo][( *dest ) ];
+		( *dest )  = trans_table[(uint8_t)colo][(uint8_t)( *dest ) ];
 		dest ++;
 	}
 }
@@ -303,8 +303,9 @@ void draw_light( Light_table *lt, int x, int y, int num, int add, int mode )
 	if ( light[num].data[offs2 + b] ) 
 	{
 		sum = light[num].data[offs2 + b] + add;
-		if ( sum < 0 ) sum = 0;if ( sum > 15 ) sum = 15;
-		virbuff[offs1 + c + b] = lt-> data[virbuff[offs1 + c + b]][sum];
+		if ( sum < 0 ) sum = 0;
+		if ( sum > 15 ) sum = 15;
+		virbuff[offs1 + c + b] = lt-> data[(uint8_t)virbuff[offs1 + c + b]][(uint8_t)sum];
 	}
 }
 
@@ -803,7 +804,7 @@ void map()
 	{
 		type = level[a*level_x_size + b].type;
 		if ( type == WALLS ) virbuff[offs] = 16;
-		else virbuff[offs] = shadow_table[virbuff[offs]][15];
+		else virbuff[offs] = shadow_table[(uint8_t)virbuff[offs]][15];
 	}
 	for ( a = 0; a < ENEMIES; a ++  ) 
 	if ( enemy[a].DEAD ) 
