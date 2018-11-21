@@ -1007,7 +1007,7 @@ void victory()
 		setpal( pal, a );
 	}
 	k.state[1] = 0;
-	while ( !k.state[1] );
+	while (!k.state[1]) tk_port_event_tick();
 	while ( a > 0 ) 
 	if ( oclock!= clock() ) 
 	{
