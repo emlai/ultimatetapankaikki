@@ -6,8 +6,6 @@
 
 void load_efp( const char *name, char *kuva, int offs )
 {
-
-	char header[7];
 	unsigned int p;
 	unsigned short w, h;
 
